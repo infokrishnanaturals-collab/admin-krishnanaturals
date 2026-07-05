@@ -56,41 +56,6 @@ export async function middleware(req: NextRequest) {
         }
     }
 
-    // Exclude static and auth paths from maintenance check
-    if (
-        pathname.startsWith('/_next') ||
-        pathname.startsWith('/admin') ||
-        pathname.startsWith('/manager') ||
-        pathname.startsWith('/auth') ||
-        pathname === '/maintenance' ||
-        pathname.match(/\.(png|jpg|jpeg|gif|svg|ico|webp)$/)
-    ) {
-        return NextResponse.next();
-    }
-
-    try {
-        // Fetch Maintenance Mode status from Supabase using Edge-Compatible native fetch
-        // Next.js fetch allows caching the response for 60 seconds to avoid DB strain and latency
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/store_settings?id=eq.1&select=maintenance_mode`, {
-            headers: {
-                'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
-                'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''}`
-            },
-            next: { revalidate: 60 }
-        });
-
-        if (res.ok) {
-            const data = await res.json();
-            if (data && data[0] && data[0].maintenance_mode) {
-                // If in maintenance mode, rewrite the request to the /maintenance page
-                req.nextUrl.pathname = '/maintenance';
-                return NextResponse.rewrite(req.nextUrl);
-            }
-        }
-    } catch (e) {
-        console.error("Middleware Supabase Check Failed", e);
-    }
-
     return NextResponse.next();
 }
 
