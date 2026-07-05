@@ -1,0 +1,4 @@
+.next/types/validator.ts(125,39): error TS2307: Cannot find module '../../src/app/products/[slug]/page.js' or its corresponding type declarations.
+.next/types/validator.ts(134,39): error TS2307: Cannot find module '../../src/app/products/page.js' or its corresponding type declarations.
+src/app/profile/page.tsx(281,120): error TS2353: Object literal may only specify known properties, and 'फोन' does not exist in type 'SetStateAction<{ address_line_1: string; city: string; state: string; postal_code: string; phone: string; }>'.
+src/app/sw.ts(11,21): error TS2552: Cannot find name 'ServiceWorkerGlobalScope'. Did you mean 'WorkerGlobalScope'?

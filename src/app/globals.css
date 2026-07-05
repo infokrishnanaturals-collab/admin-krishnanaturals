@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap');
+
+@import "tailwindcss";
+
+/* ================================================================
+   KRISHNA NATURALS — ADMIN DESIGN SYSTEM (Light Organic Theme)
+   ================================================================ */
+
+:root {
+  /* Brand Colors — Luxury Organic Palette */
+  --gold: #C9A84C;
+  --gold-light: #E2CA7E;
+  --gold-dark: #A68A3E;
+  --gold-muted: rgba(201, 168, 76, 0.1);
+  --cream: #FDFAF3;
+  --cream-dark: #F5F0E3;
+  --forest: #1A3A2A;
+  --forest-light: #2A5A40;
+  --forest-dark: #0E1F16;
+  --forest-muted: rgba(26, 58, 42, 0.06);
+
+  /* Neutrals */
+  --white: #FFFFFF;
+  --gray-50: #FAFAF9;
+  --gray-100: #F5F5F4;
+  --gray-200: #E7E5E4;
+  --gray-300: #D4D1CD;
+  --gray-400: #A8A29E;
+  --gray-500: #78716C;
+  --gray-600: #57534E;
+  --gray-700: #44403C;
+  --gray-800: #292524;
+  --gray-900: #1C1917;
+
+  /* Admin Semantic Variables */
+  --admin-bg: var(--cream);
+  --admin-sidebar: var(--white);
+  --admin-card: var(--white);
+  --admin-text: var(--gray-800);
+  --admin-text-muted: var(--gray-500);
+  --admin-border: var(--border);
+
+  /* Border & Radius */
+  --border: rgba(0, 0, 0, 0.08);
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* === Base Styles === */
+html, body {
+  background-color: var(--admin-bg);
+  color: var(--admin-text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  color: var(--forest-dark);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* === Utility Classes === */
+
+@layer components {
+  /* Glass / Clean Cards */
+  .admin-panel, .glass-card, .stat-card {
+    background: var(--admin-card);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.2s ease;
+    padding: 1.5rem;
+  }
+
+  .admin-panel:hover, .stat-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* Headings */
+.admin-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--forest-dark);
+  margin-bottom: 0.5rem;
+}
+.admin-subheading {
+  font-size: 0.875rem;
+  color: var(--admin-text-muted);
+}
+
+/* Admin Table */
+.admin-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--admin-border);
+  background: var(--admin-card);
+}
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.admin-table thead {
+  background: var(--gray-50);
+  border-bottom: 1px solid var(--admin-border);
+}
+.admin-table th {
+  padding: 1rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--gray-500);
+  letter-spacing: 0.05em;
+}
+.admin-table td {
+  padding: 1rem 1.25rem;
+  font-size: 0.875rem;
+  color: var(--admin-text);
+  border-bottom: 1px solid var(--admin-border);
+}
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.admin-table tbody tr:hover {
+  background: var(--forest-muted);
+}
+
+/* Admin Buttons */
+.admin-btn-primary {
+  background: var(--forest);
+  color: var(--white);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.admin-btn-primary:hover:not(:disabled) {
+  background: var(--forest-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 58, 42, 0.2);
+}
+.admin-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-btn-secondary {
+  background: var(--white);
+  color: var(--gray-700);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.admin-btn-secondary:hover:not(:disabled) {
+  background: var(--gray-50);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Admin Inputs */
+.admin-input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--admin-text);
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+.admin-input:focus {
+  outline: none;
+  border-color: var(--forest-light);
+  box-shadow: 0 0 0 3px var(--forest-muted);
+}
+.admin-input::placeholder {
+  color: var(--gray-400);
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.status-badge.success {
+  background: rgba(34, 197, 94, 0.1);
+  color: #166534;
+}
+.status-badge.warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #92400e;
+}
+.status-badge.danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #991b1b;
+}
+.status-badge.info {
+  background: rgba(59, 130, 246, 0.1);
+  color: #1e40af;
+}
+
+/* Editor Specific Overrides for Light Theme */
+.ce-block__content {
+  color: var(--admin-text) !important;
+}
+.ce-toolbar__plus, .ce-toolbar__settings-btn {
+  color: var(--gray-600) !important;
+}
+.ce-toolbar__plus:hover, .ce-toolbar__settings-btn:hover {
+  background-color: var(--gray-100) !important;
+}
+.ce-popover {
+  background-color: var(--white) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+.ce-popover-item:hover {
+  background-color: var(--gray-50) !important;
+}
+.ce-popover-item__title, .ce-popover-item__icon {
+  color: var(--gray-800) !important;
+}
+.ce-inline-toolbar {
+  background-color: var(--white) !important;
+  border: 1px solid var(--border) !important;
+}
+.ce-inline-tool {
+  color: var(--gray-800) !important;
+}
+.ce-inline-tool:hover {
+  background-color: var(--gray-50) !important;
+}
+
+/* === Animation Utilities === */
+.fade-in-up {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.fade-in-left {
+  animation: fadeInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.fade-in-delay-1 { animation-delay: 0.1s; }
+.fade-in-delay-2 { animation-delay: 0.2s; }
+.fade-in-delay-3 { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Float Animation for organic shapes */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float 7s ease-in-out infinite reverse;
+}
