@@ -3,7 +3,7 @@ import { getAdminAuth } from '@/lib/firebase/admin';
 import { Resend } from 'resend';
 import { VerificationEmail } from '@/emails/VerificationEmail';
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy');
 
 export async function POST(req: Request) {
     try {

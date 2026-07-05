@@ -3,7 +3,7 @@ import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { sendAndLogEmail } from '@/lib/email/sender';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy');
 
 export async function GET(req: Request) {
     // Only allow via cron or secure token in production

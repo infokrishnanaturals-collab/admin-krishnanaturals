@@ -5,7 +5,7 @@ import { createClient } from '@supabase/supabase-js';
 import OfferTemplate from '@/emails/OfferTemplate';
 
 // 1. Initialize Resend
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy');
 
 // 2. Initialize Firebase Admin
 if (!admin.apps.length) {
