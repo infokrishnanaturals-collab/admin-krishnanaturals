@@ -1,17 +1,17 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase admin client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!; // using anon for now as fallback if service is missing
-const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
 export async function GET(request: Request) {
     // Verify Cron Secret if needed
     // const authHeader = request.headers.get('authorization');
     // if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) return new NextResponse('Unauthorized', { status: 401 });
 
     try {
+        // Initialize Supabase admin client
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+        const supabaseServiceKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!; // using anon for now as fallback if service is missing
+        const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
         // Fetch logs from the last 24 hours
         const yesterday = new Date();
         yesterday.setDate(yesterday.getDate() - 1);

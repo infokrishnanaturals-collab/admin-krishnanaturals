@@ -7,25 +7,31 @@ import OfferTemplate from '@/emails/OfferTemplate';
 // 1. Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy');
 
-// 2. Initialize Firebase Admin
-if (!admin.apps.length) {
-    admin.initializeApp({
-        credential: admin.credential.cert({
-            projectId: process.env.FIREBASE_PROJECT_ID,
-            clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-            privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-        }),
-    });
-}
-
-// 3. Initialize Supabase
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
-
 export async function POST(req: Request) {
     try {
+        // 2. Initialize Firebase Admin
+        if (!admin.apps.length) {
+            let privateKey = process.env.FIREBASE_PRIVATE_KEY || '';
+            if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
+                privateKey = privateKey.slice(1, -1);
+            }
+            privateKey = privateKey.replace(/\\n/g, '\n');
+
+            admin.initializeApp({
+                credential: admin.credential.cert({
+                    projectId: process.env.FIREBASE_PROJECT_ID,
+                    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+                    privateKey: privateKey,
+                }),
+            });
+        }
+
+        // 3. Initialize Supabase
+        const supabase = createClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.SUPABASE_SERVICE_ROLE_KEY!
+        );
+
         const body = await req.json();
         const { title, message, discountCode, target, sendEmail, sendPush } = body;
         const adminSecret = req.headers.get('x-admin-secret');
